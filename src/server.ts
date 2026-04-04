@@ -1,12 +1,12 @@
 import express from "express";
+import { router } from "./routes/routes";
 
 const app = express();
 
-app.get("/", (req,res) => {
-    res.send("rodando")
-})
+app.use(express.json());
 
+app.use(router);
 
 app.listen(3000, () =>{
-    console.log("rodando")
+    console.log("Servidor online na porta 3000!");
 })
