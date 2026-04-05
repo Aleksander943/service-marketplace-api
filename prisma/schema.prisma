@@ -20,14 +20,11 @@ model User {
   appointments    Appointment[]
 }
 
-model Profissinal {
+model Profissional {
   id              Int   @id @default(autoincrement())
   nome            String
   email           String
   password        String  
-  especialidade   String
-  bio             String  
-  horario         DateTime
   appointments    Appointment[]
 }
 
@@ -41,5 +38,5 @@ model Appointment {
   user            User        @relation(fields: [userId], references: [id])
 
   professionalId  Int
-  professional    Profissinal @relation(fields: [professionalId], references: [id])
+  professional    Profissional @relation(fields: [professionalId], references: [id])
 }
