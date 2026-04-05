@@ -6,7 +6,7 @@ export const CreateProfissionalService = async ( nome: string, email: string, pa
         throw new Error("E-mail é necessário!");
     }
 
-    const emUso = await prisma.Profissional.findFirst({
+    const emUso = await prisma.profissional.findFirst({
         where: { email },
     });
 
@@ -14,7 +14,7 @@ export const CreateProfissionalService = async ( nome: string, email: string, pa
         throw new Error("Usuário já cadastrado!")
     }
 
-    const created = await prisma.Profissional.create({
+    const created = await prisma.profissional.create({
         data: {
             nome,
             email,
