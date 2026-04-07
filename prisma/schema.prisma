@@ -12,34 +12,44 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id              Int    @id @default(autoincrement())
-  name            String
-  email           String
-  password        String 
-  appointments    Appointment[]
+enum Role {
+  CLIENTE
+  PRESTADOR
 }
 
-model Profissinal {
-  id              Int   @id @default(autoincrement())
-  nome            String
-  email           String
-  password        String  
-  especialidade   String
-  bio             String  
-  horario         DateTime
-  appointments    Appointment[]
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String
+  role         Role          @default(CLIENTE) // Define quem é quem
+  
+  // Relações
+  services     Service[]     // Se for Prestador, ele tem serviços cadastrados
+  appointments Appointment[] // Agendamentos que ele participou (como cliente)
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  price       Decimal
+  category    String
+  
+  userId      Int
+  provider    User     @relation(fields: [userId], references: [id])
+  
+  appointments Appointment[]
 }
 
 model Appointment {
-  id              Int   @id @default(autoincrement())
-  date            DateTime
-  description     String
-  status          String
-
-  userId          Int
-  user            User        @relation(fields: [userId], references: [id])
-
-  professionalId  Int
-  professional    Profissinal @relation(fields: [professionalId], references: [id])
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  status      String   @default("PENDENTE")
+  
+  clientId    Int
+  client      User     @relation(fields: [clientId], references: [id])
+  
+  serviceId   Int
+  service     Service  @relation(fields: [serviceId], references: [id])
 }
