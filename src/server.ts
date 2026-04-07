@@ -7,6 +7,6 @@ app.use(express.json());
 
 app.use(router);
 
-app.listen(3000, () =>{
-    console.log("Servidor online na porta 3000!");
+app.listen(8080, () =>{
+    console.log("Servidor online na porta 8080!");
 })
