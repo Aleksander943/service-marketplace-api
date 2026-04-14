@@ -22,7 +22,7 @@ export const isAuthenticated = (req: AuthRequest, res: Response, next: NextFunct
     const [, token] = authHeader.split(" ");
 
     const segredo = process.env.JWT_SECRET;
-9
+
     try{
         const {sub} = verify(token, segredo as string) as Payload;
 
