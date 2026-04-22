@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {AppointmentsServices} from "../services/AppointmentServices"
+import {AppointmentsServices} from "../services/CreateAppointmentService"
 
 export const AppointmentController = async (req: Request, res: Response) => {
 

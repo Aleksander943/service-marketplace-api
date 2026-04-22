@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CadastroServServices } from "../services/CreateServServices";
+import { CadastroServServices } from "../services/CreateServiceService";
 
 export const CadastroServController = async (req: Request, res: Response) => {
   const { title, description, price, category } = req.body;
