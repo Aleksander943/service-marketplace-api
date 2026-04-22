@@ -4,7 +4,7 @@ export const ListServicesService = async (category?: string) => {
 
     const listar = await prisma.service.findMany({
         where: {
-            category: category
+            category: category ? category : undefined
         }, include:{
             provider:true
     }
