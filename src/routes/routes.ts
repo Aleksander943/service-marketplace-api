@@ -6,6 +6,7 @@ import { CadastroServController } from "../controllers/CreateServiceController";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { ListServicesController } from "../controllers/ListServicesController";
 import { AppointmentController } from "../controllers/CreateAppointmentController";
+import { StatusAppointmentController } from "../controllers/StatusAppointmentController";
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.post("/servicos", isAuthenticated, CadastroServController);
 router.post("/agendamento", isAuthenticated, AppointmentController)
 
 router.get("/services", ListServicesController);
+router.get("/appointments/me", isAuthenticated, StatusAppointmentController);
 
 
 export {router};
