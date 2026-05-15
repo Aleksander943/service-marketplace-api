@@ -8,36 +8,61 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  name         String
-  email        String        @unique
-  password     String
-  role         Role          @default(CLIENTE)
-  appointments Appointment[]
-  services     Service[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  role Role @default(CLIENTE)
+
+  bio       String?
+  regiao    String?
+  profissao String?
+  avatar    String?
+
+  appointments Appointment[] @relation("ClientAppointments")
+
+  services Service[] @relation("ProviderServices")
+
+  skills Skill[]
 }
 
 model Service {
-  id           Int           @id @default(autoincrement())
-  title        String
-  description  String
-  price        Decimal       @db.Decimal(10, 2)
-  category     String
-  providerId   Int
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  price       Decimal @db.Decimal(10, 2)
+  category    String
+
+  providerId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   appointments Appointment[]
-  provider     User          @relation(fields: [providerId], references: [id])
+
+  provider User @relation("ProviderServices", fields: [providerId], references: [id])
 }
 
 model Appointment {
-  id        Int      @id @default(autoincrement())
-  date      DateTime
-  status    String   @default("PENDENTE")
+  id     Int      @id @default(autoincrement())
+  date   DateTime
+  status String   @default("PENDENTE")
+
   clientId  Int
   serviceId Int
-  client    User     @relation(fields: [clientId], references: [id])
-  service   Service  @relation(fields: [serviceId], references: [id])
+
+  client  User    @relation("ClientAppointments", fields: [clientId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
+}
+
+model Skill {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 }
 
 enum Role {
