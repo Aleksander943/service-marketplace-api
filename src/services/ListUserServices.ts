@@ -11,4 +11,4 @@ export const GetUserProfileService = async (userId: number) => {
       services: true,
     },
   });
-};
+}; 
