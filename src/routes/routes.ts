@@ -9,6 +9,7 @@ import { AppointmentController } from "../controllers/CreateAppointmentControlle
 import { StatusAppointmentController } from "../controllers/StatusAppointmentController";
 import { InfoUserController } from "../controllers/InfoUserController";
 import { GetUserProfileController } from "../controllers/ListUserController";
+import { getServiceById } from "../controllers/DetalheController";
 
 const router = Router();
 
@@ -21,6 +22,7 @@ router.patch("/perfil", isAuthenticated, InfoUserController);
 
 router.get("/services", ListServicesController);
 router.get("/appointments/me", isAuthenticated, StatusAppointmentController);
-router.get("/perfil", isAuthenticated, GetUserProfileController )
+router.get("/perfil", isAuthenticated, GetUserProfileController );
+router.get("/services/:id", isAuthenticated, getServiceById);
 
 export {router};
