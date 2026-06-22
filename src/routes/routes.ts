@@ -1,5 +1,5 @@
 import { Router } from "express";
-import 'dotenv/config';
+import "dotenv/config";
 import { CreateUserController } from "../controllers/CreateUserController";
 import { AuthUserController } from "../controllers/AuthUserController";
 import { CadastroServController } from "../controllers/CreateServiceController";
@@ -10,19 +10,21 @@ import { StatusAppointmentController } from "../controllers/StatusAppointmentCon
 import { InfoUserController } from "../controllers/InfoUserController";
 import { GetUserProfileController } from "../controllers/ListUserController";
 import { getServiceById } from "../controllers/DetalheController";
+import { upload } from "../config/multer";
 
 const router = Router();
 
 router.post("/cadastro", CreateUserController);
 router.post("/login", AuthUserController);
 router.post("/servicos", isAuthenticated, CadastroServController);
-router.post("/agendamento", isAuthenticated, AppointmentController)
+router.post("/agendamento", isAuthenticated, AppointmentController);
+router.post("/service",isAuthenticated, upload.single("image"), CadastroServController);
 
 router.patch("/perfil", isAuthenticated, InfoUserController);
 
 router.get("/services", ListServicesController);
 router.get("/appointments/me", isAuthenticated, StatusAppointmentController);
-router.get("/perfil", isAuthenticated, GetUserProfileController );
+router.get("/perfil", isAuthenticated, GetUserProfileController);
 router.get("/services/:id", isAuthenticated, getServiceById);
 
-export {router};
+export { router };
