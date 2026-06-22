@@ -6,6 +6,7 @@ export const CadastroServServices = async (
   price: number,
   category: string,
   user_id: string,
+  imageUrl?: string,
 ) => {
   const userIdNumber = Number(user_id);
 
@@ -27,6 +28,7 @@ export const CadastroServServices = async (
       description,
       price,
       category,
+      imageUrl,
       provider: {
         connect: { id: user.id },
       },
