@@ -9,7 +9,7 @@ export const CreateUserController = async (req: Request, res: Response) => {
     const result = await CreatedUserService(nome, email, password, role);
     res.status(201).json(result);
   } catch (err: any) {
-    console.log(err); // <-- ADICIONE ISSO AQUI
+    console.log(err); 
     res.status(400).json({ message: err.message || "Error" });
   }
 };
